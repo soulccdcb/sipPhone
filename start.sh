@@ -17,12 +17,8 @@ __start_pm2() {
 }
 
 __start_cpp() {
-  ldconfig
-  sleep 1m
-  cd /tcpTransportPing
-  pm2   start   app.js
-  cd /var/www/Forever/bin
-  pm2 start ./forever >/dev/null 2>&1 &
+  cd /var/www
+  pm2 start index.js
 }
 
 # run
