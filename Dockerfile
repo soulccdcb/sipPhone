@@ -3,13 +3,9 @@ MAINTAINER JiYun Tech Team <mboss0@163.com>
 
 ADD ./sources.list /etc/apt/sources.list
 
-ADD ./boost.tar.bz2 /usr/local/
-ADD ./hkv6.tar.bz2 /usr/local/
-ADD ./mbed.tar.bz2 /usr/local/
-ADD ./opc.tar.bz2 /usr/local/
-ADD ./ld.so.conf /etc/ld.so.conf
 
-RUN set -x && apt-get update && apt-get install -y --no-install-recommends  openssh-server tzdata wget gdb iputils-ping && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/*
+
+RUN set -x && apt-get update && apt-get install -y --no-install-recommends  openssh-server tzdata wget  iputils-ping && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/*
 RUN mkdir /var/run/sshd && \
     rm /etc/localtime && \
     ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
@@ -25,9 +21,6 @@ ADD https://nodejs.org/dist/v14.19.0/node-v14.19.0-linux-x64.tar.gz /tmp/
 RUN tar -xzf /tmp/node-v14.19.0-linux-x64.tar.gz -C /usr/local --strip-components=1 --no-same-owner && \
     rm -rf /tmp/*
     
-COPY ./tcpTransportPing.tar.gz /tmp/
-RUN tar -xzf /tmp/tcpTransportPing.tar.gz -C /  --no-same-owner && \
-    rm -rf /tmp/*
 
 ADD ./start.sh /start.sh
 RUN chmod 755 /start.sh
